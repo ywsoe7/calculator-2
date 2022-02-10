@@ -5,3 +5,60 @@ from arithmetic import (add, subtract, multiply, divide, square, cube,
 
 
 # Replace this with your code
+# repeat forever:
+#     read input
+#     tokenize input
+#         if the first token is "q":
+#             quit
+#         else:
+#             (decide which math function to call based on first token)
+#             if the first token is 'pow':
+#                   call the power function with the other two tokens
+
+#             (...etc.)
+
+while True:
+    request = input("What do you want to count? ")
+    tokens = request.split(" ")
+    if "q" in tokens or "quit" in tokens:
+        print("Thank you, the calculator is off.")
+        break
+    elif len(tokens) < 2:
+        print("Please, provide more input ")
+        continue
+        
+    operator = tokens[0]
+    num1 = tokens[1]
+
+    if len(tokens) < 3:
+        num2 = 0
+    else:
+        num2 = tokens[2]
+    
+    if len(tokens) > 3:
+        num3 = tokens[3]
+    
+    result = None
+
+    if not num1.isdigit() or not num2.isdigit():
+        print("Please use numbers")
+        continue
+    elif operator == "+":
+        result = add(float(num1), float(num2))
+    elif operator == "-":
+        result = subtract(float(num1), float(num2))
+    elif operator == "*":
+        result = multiply(float(num1), float(num2))
+    elif operator == "/":
+        result = divide(float(num1), float(num2))
+    elif operator == "square":
+        result = square(float(num1))
+    elif operator == "cube":
+        result = cube(float(num1))
+    elif operator == "pow" or operator == "power":
+        result = power(float(num1), float(num2))
+    elif operator == "mod" or operator == "modulo":
+        result = mod(float(num1), float(num2))
+  
+    print(result)
+    
