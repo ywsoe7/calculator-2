@@ -3,19 +3,7 @@
 from arithmetic import (add, subtract, multiply, divide, square, cube,
                         power, mod, )
 
-
-# Replace this with your code
-# repeat forever:
-#     read input
-#     tokenize input
-#         if the first token is "q":
-#             quit
-#         else:
-#             (decide which math function to call based on first token)
-#             if the first token is 'pow':
-#                   call the power function with the other two tokens
-
-#             (...etc.)
+from functools import reduce
 
 while True:
     request = input("What do you want to count? ")
@@ -24,6 +12,9 @@ while True:
         print("Thank you, the calculator is off.")
         break
     elif len(tokens) < 2:
+        if request.isalpha():
+            print("this is not a valid input")
+            continue
         print("Please, provide more input ")
         continue
         
@@ -31,17 +22,24 @@ while True:
     num1 = tokens[1]
 
     if len(tokens) < 3:
-        num2 = 0
+        num2 = "0"
     else:
         num2 = tokens[2]
     
     if len(tokens) > 3:
         num3 = tokens[3]
-    
+
+    if len(tokens) > 4:
+        print("Please input fewer numbers.")
+        continue
+
     result = None
 
     if not num1.isdigit() or not num2.isdigit():
         print("Please use numbers")
+        continue
+    elif operator not in ["+", "-", "*", "pow", "power", "modulo", "mod", "cube", "square", "/"]:
+        print("Please, use operators like +, -, *, pow, mod, cube, square, /")
         continue
     elif operator == "+":
         result = add(float(num1), float(num2))
@@ -59,6 +57,6 @@ while True:
         result = power(float(num1), float(num2))
     elif operator == "mod" or operator == "modulo":
         result = mod(float(num1), float(num2))
-  
+    
     print(result)
     
